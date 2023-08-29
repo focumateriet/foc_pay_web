@@ -101,27 +101,6 @@ def drickomaten_payment_form(request: HttpRequest) -> response:
     return _payment_form(request, price=price, machine_name=machine_name, page_content=page_content)
 
 
-def focumama_free_vend_form(request: HttpRequest) -> response:
-    price = 1
-    machine_name = Payment.MACHINES.focumama
-    page_content = {
-        "title": _("Period products"),
-        "help_text": [
-            _(
-                "With the help of a simple trick you can acquire free period products from Focumama "
-                "(while supplies last)."
-            ),
-            _("Enter your phone number and open Swish."),
-            _("<b>IMPORTANT!</b> Do not accept the payment request in Swish - decline it instead!"),
-            _(
-                "When your payment request has been processed you are free to select from slot EO or "
-                "slot E1 in Focumama."
-            ),
-        ],
-    }
-    return _payment_form(request, price=price, machine_name=machine_name, page_content=page_content)
-
-
 def payment(request: HttpRequest, payment_id: str) -> response:
     return render(request, "payments/payment.html", context={"payment_id": payment_id})
 

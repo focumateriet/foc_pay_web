@@ -21,18 +21,6 @@ class PaymentViewSet(RetrieveModelMixin, ListModelMixin, GenericViewSet):
             return Response(None)
 
     @action(detail=False)
-    def get_free_vend_focumama_payment(self, request):
-        free_vend_focumama_payment = Payment.declined.filter(
-            machine=Payment.MACHINES.focumama,
-            amount=1,
-        ).first()
-        if free_vend_focumama_payment:
-            serializer = self.get_serializer(free_vend_focumama_payment)
-            return Response(serializer.data)
-        else:
-            return Response(None)
-
-    @action(detail=False)
     def get_paid_drickomaten_payment(self, request):
         paid_drickomaten_payment = Payment.paid.filter(machine=Payment.MACHINES.drickomaten).first()
         if paid_drickomaten_payment:
